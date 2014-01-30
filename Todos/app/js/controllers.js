@@ -1,11 +1,9 @@
 ﻿var todoControllers = angular.module('todoControllers', []);
 
-todoControllers.controller('TodoCtrl', ['$scope', 'Todo', function ($scope, Todo) {
+todoControllers.controller('TodoListCtrl', ['$scope', 'Todo', function ($scope, Todo) {
     $scope.searchBy = null;
     $scope.isDisabled = !$scope.searchBy;
-    Todo.query(function(data) {
-        $scope.notes = data.items;
-    });
+    $scope.notes = Todo.query();
 
     $scope.onSearch = function () {
         // to be implemented
