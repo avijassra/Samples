@@ -3,7 +3,7 @@
 todoControllers.controller('TodoListCtrl', ['$scope', 'Todo', function ($scope, Todo) {
     $scope.searchBy = null;
     $scope.isDisabled = !$scope.searchBy;
-    $scope.notes = Todo.query();
+    $scope.todos = Todo.query();
 
     $scope.onSearch = function () {
         // to be implemented

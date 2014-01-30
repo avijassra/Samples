@@ -18,7 +18,20 @@ describe("todoApp.controllers", function() {
         beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
             $httpBackend = _$httpBackend_;
             $httpBackend.expectGET("data/todos.json")
-                .respond({})
+                .respond([{title: '1', desc: 'one'}, {title:'2', desc:'two'}])
+            scope = $rootScope.$new();
+            ctrl = $controller('TodoListCtrl', {$scope: scope});
         }))
-    })
+
+        it('should create "todos" model wth 2 task items fetched from xhr', function() {
+            expect(scope.todos).toEqualData([]);
+            $httpBackend.flush();
+
+            expect(scope.todos).toEqualData([{title: '1', desc: 'one'}, {title:'2', desc:'two'}]);
+        });
+
+        it('should have empty search criteria', function() {
+            expect(scope.searchBy).toBeNull();
+        });
+    });
 });
